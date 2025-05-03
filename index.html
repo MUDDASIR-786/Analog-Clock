@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Analog Clock</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    body {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-image: radial-gradient( circle farthest-corner at 50.3% 47.3%,  rgba(113,42,92,1) 0.1%, rgba(40,25,46,1) 90% );
+    }
+    .header{
+        width: 100%;
+        height: 250px;
+        background-color: transparent;
+        display: flex;
+        flex-direction: row;
+        /* justify-content: space-evenly; */
+        /* align-items: center; */
+    }
+    .heading1{
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        background: linear-gradient(to top right, rgb(24, 0, 24), purple , 80% , rgb(44, 0, 44));
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        position: absolute;
+        font-size: 30px;
+        font-weight: bold;
+        color: white;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 30px rgb(255, 2, 255);
+        animation-name: animate;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+    
+    }
+    .heading{
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        background: linear-gradient(to top right, rgb(24, 0, 24), purple , 80% , rgb(44, 0, 44));
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        font-size: 30px;
+        font-weight: bold;
+        color: white;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 30px rgb(255, 2, 255);
+        animation-name: animate;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        transition: 3s;
+    }
+    @keyframes animate {
+       0%{
+        transform: translateX(1000px);
+       }
+       50%{
+        transform: translateX(100px);
+       }
+       100%{
+        transform: translateX(500px);
+       }
+    }
+    .counter {
+      position: relative;
+    }
+    .clock {
+      width: 300px;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.01);
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0px 0px 30px rgb(66, 2, 66);
+      border-radius: 50%;
+      position: relative;
+    }
+    .clock::before {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: white;
+      z-index: 10;
+    }
+    .clock span {
+      position: absolute;
+      transform: rotate(calc(30deg * var(--i)));
+      inset: 12px;
+      text-align: center;
+    }
+    .clock span b {
+      transform: rotate(calc(-30deg * var(--i)));
+      display: inline-block;
+      font-size: 20px;
+      color: white;
+    }
+    .hand {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+    .hand i {
+      position: absolute;
+      background-color: var(--clr);
+      width: 4px;
+      height: 70px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+    
+    <div class="header"> 
+        <div class="heading"> Analog Clock</div> 
+        <div class="heading1"> Analog Clock</div>
+    </div>
+    <br>
+    <div class="counter">
+    <div class="clock">
+      <div style="--clr:#ff3d58;" id="hour" class="hand"><i></i></div>
+      <div style="--clr:#00abff;" id="min" class="hand"><i></i></div>
+      <div style="--clr:#ffffff;" id="sec" class="hand"><i></i></div>
+
+      <span style="--i:1;"><b>1</b></span>
+      <span style="--i:2;"><b>2</b></span>
+      <span style="--i:3;"><b>3</b></span>
+      <span style="--i:4;"><b>4</b></span>
+      <span style="--i:5;"><b>5</b></span>
+      <span style="--i:6;"><b>6</b></span>
+      <span style="--i:7;"><b>7</b></span>
+      <span style="--i:8;"><b>8</b></span>
+      <span style="--i:9;"><b>9</b></span>
+      <span style="--i:10;"><b>10</b></span>
+      <span style="--i:11;"><b>11</b></span>
+      <span style="--i:12;"><b>12</b></span>
+    </div>
+  </div>
+
+  <script>
+    let hr = document.getElementById("hour");
+    let min = document.getElementById("min");
+    let sec = document.getElementById("sec");
+
+    function displayTime(){
+      let date = new Date();
+
+      let hh = date.getHours();
+      let mm = date.getMinutes();
+      let ss = date.getSeconds();
+
+      let hrRotation = 30 * hh + mm / 2;
+      let mRotation = 6 * mm;
+      let sRotation = 6 * ss;
+
+      hr.style.transform = `rotate(${hrRotation}deg)`;
+      min.style.transform = `rotate(${mRotation}deg)`;
+      sec.style.transform = `rotate(${sRotation}deg)`;
+    }
+
+    setInterval(displayTime, 1000);
+  </script>
+</body>
+</html>
